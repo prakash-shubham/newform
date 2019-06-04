@@ -5,3 +5,19 @@ newform.myform:
     _title: 'MyForm'
   requirements: 
     _permission: 'access content'
+
+newform.hello:
+  path: '/hello'
+  defaults:
+    _controller: '\Drupal\newform\Controller\newformController::hello'
+    _title: 'Bla Bla'
+  requirements:
+    _permission: 'access content'
+
+newform.page:
+  path: '/page'
+  defaults:
+    _controller: '\Drupal\newform\Controller\pageController::page'
+    _title: 'My first page in D8'
+  requirements:
+    _permission: 'access content'

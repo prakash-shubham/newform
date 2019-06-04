@@ -1,0 +1,7 @@
+newform.myform:
+  path: '/admin/myform'
+  defaults:
+    _form: '\Drupal\newform\Form\MyForm' 
+    _title: 'MyForm'
+  requirements: 
+    _permission: 'access content'

@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ * Contains newform.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function newform_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the newform module.
+    case 'help.page.newform':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function newform_form_SubmitForm_alter(&$form, $form_state, $form_id) {
+	// print_r('hello');
+	// die;
+
+	
+    $form['reset'] = array(
+      '#type' => 'button',
+      '#button_type' => 'reset',
+
+      '#value' => t('Clear'),
+      '#weight' => 9,
+      '#validate' => array(),
+      '#attributes' => array(
+            'onclick' => 'this.form.reset(); return false;',
+          ),
+    );
+    
+  // return $form;
+}
+
+function newform_form_node_events_form_alter(&$form, $form_state, $form_id) {
+
+	$form['event_date'] = array (
+			'#type' => 'date',
+			'#title' => t('Event Date'),
+      // '#required' => TRUE,
+		);
+
+		$form['#validate'][] = 'newform_form_validate';
+
+}
+
+
+function newform_form_validate($form, &$form_state) {
+
+	$value = $form_state->getValue('event_date') ;
+	$date1 = date('Y-m-d');
+	
+	if($value < $date1) {
+		$form_state->setErrorByName('event_date', ('Invalid Date'));
+	}
+}
+
+
